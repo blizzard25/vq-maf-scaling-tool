@@ -12,10 +12,6 @@ import org.jfree.chart.plot.*;
 import org.jfree.data.xy.*;
 
 /**
- * Currently this class is just a placeholder. But eventually 
- * this will contain the generated output graph and table in the same pane.
- * I chose JFreeChart but I honestly don't have a preference
- * if you're assisting in the GUI
  * @author esanders
  *
  */
