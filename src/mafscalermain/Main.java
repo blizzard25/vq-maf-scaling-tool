@@ -30,6 +30,7 @@ public class Main {
         
     }
     
+    //I realize this is a redudant method, but it will be edited in the future to reflect another function
     public static void setGraphAndTable(Container frame) {
     	
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
