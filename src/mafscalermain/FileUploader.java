@@ -20,13 +20,13 @@ public class FileUploader extends JFrame {
     public FileUploader(String title) {
     	
     	super(title);
-	   	setSize(350, 100);
-	   	setDefaultCloseOperation(EXIT_ON_CLOSE);
-	   	setResizable(false);
-	   	Container c = getContentPane();
-	   	c.setLayout(new FlowLayout());    
-	   	JButton openButton = new JButton("Open File");
-	   	JButton quitButton = new JButton("Close App");
+	setSize(350, 100);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	setResizable(false);
+	Container c = getContentPane();
+	c.setLayout(new FlowLayout());    
+	JButton openButton = new JButton("Open File");
+	JButton quitButton = new JButton("Close App");
 	   
 	   final JLabel appStatusOut = new JLabel(
     		"File pathname will display here on selection");
@@ -49,7 +49,7 @@ public class FileUploader extends JFrame {
 				   CsvReadAndStore.parseCsvFile(path);
 				   float[][] test = CsvReadAndStore.getFinalData();
 				   double[] multArray = CsvReadAndStore.getMultArr();
-					
+				   
 					ChartDisplay.generateGraphData(test);
 					ChartDisplay.generateRowData(multArray);
 					ChartDisplay.generateOutputPanel(test);
@@ -59,9 +59,9 @@ public class FileUploader extends JFrame {
 				   
 			   } else {
 				   
-          appStatusOut.setText("Upload Canceled");
+          			appStatusOut.setText("Upload Canceled");
           
-        }
+        		}
 			   
       }
  
@@ -78,6 +78,7 @@ public class FileUploader extends JFrame {
 		   
 	   });
 	   
+	   //add the buttons and status containers to the pane
 	   c.add(openButton);
 	   c.add(quitButton);
 	   c.add(appStatusOut);
