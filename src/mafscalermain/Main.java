@@ -14,7 +14,7 @@ public class Main {
 	static String uploaderTitle = new String("Upload CSV File");
 	static String chartTitle = new String("Output Data");
     
-    public static void main(final String[] args) {
+    public static void main(String[] args) {
 
     	JPanel inputPanel = new JPanel();
     	FileUploader fileUploader = new FileUploader(uploaderTitle);
