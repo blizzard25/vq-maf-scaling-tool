@@ -12,6 +12,7 @@ import org.jfree.chart.plot.*;
 import org.jfree.data.xy.*;
 
 /**
+ * This class generates the output graph from the CSV log data
  * @author esanders
  *
  */
@@ -45,7 +46,6 @@ public class ChartDisplay extends JFrame {
 		
 	}
 
-	//Just creating some random data values to put in the temporary graph
     public static XYDataset generateGraphData(float[][] data) {
     	
     	XYSeriesCollection dataset = new XYSeriesCollection();
@@ -89,6 +89,7 @@ public class ChartDisplay extends JFrame {
     }
     public static Object[][] generateRowData(double[] mArr) {
     	
+    	//Table voltage axis values
     	Object[][] rowData = new Object[mArr.length][2];
 		Object columnNames[] = {
 	    		".08 (V)",
