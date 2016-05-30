@@ -34,6 +34,7 @@ public class VariableRetriever {
 		
 	}
 	
+	//getters and setters
 	public float getRPM() { return rpm; }
 	public void setRPM(float rpm) {
 		this.rpm = rpm;
