@@ -16,8 +16,6 @@ public class Main {
     
     public static void main(final String[] args) {
 
-    	JTextField cipherChoice = new JTextField();
-    	JTextField romEditorChoice = new JTextField();
     	JPanel inputPanel = new JPanel();
     	FileUploader fileUploader = new FileUploader(uploaderTitle);
         fileUploader.setVisible(true);
