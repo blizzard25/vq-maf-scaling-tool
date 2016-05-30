@@ -1,5 +1,5 @@
 # vq-maf-scaling-tool
-Simple tool for simplification of MAF scaling for Nissan and Infinitis on the VQ platform. 
+Simple tool for simplification of MAF (Mass Air Flow) sensor voltage scaling for Nissan and Infinitis on the VQ platform. 
 
 External Libraries (all libraries can be found in the .zip file):
 Apache Commons CSV 1.2 
@@ -16,3 +16,5 @@ If you would like to create a project, I included all of the required external l
 Known bug 1: Double headers aren't supported yet, so if an upload doesn't display the chart and multiplier the most common bug lies in the log generating a duplicate header (so far the most common culprit is duplicate tracer headers when using ROM Editor, however some cars log duplicate Knock Strength, Engine Speed, and Base Fuel Schedule. So be aware). 
 
 Known bug 2: Display chart/table panel centers vertically fine, however it is offset slightly horizontally.
+
+Future versions: Implement a regression function rather than just using a percent average. Allow an input injector scaler to serve as a dependent variable in the calculations.
