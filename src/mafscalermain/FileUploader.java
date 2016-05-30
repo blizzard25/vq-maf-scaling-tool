@@ -6,6 +6,14 @@ import java.io.*;
 
 import javax.swing.*;
 
+/**
+ * This class generates an upload prompt panel and uploads the specified
+ * CSV file. After upload the upload box panel will close.
+ * If the upload failed (common failure is double header input),
+ * the box will remain to display the file path name.
+ * @author esanders
+ *
+ */
 @SuppressWarnings("serial")
 public class FileUploader extends JFrame {
     
