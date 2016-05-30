@@ -15,6 +15,7 @@ import org.apache.commons.csv.*;
  */
 public class CsvReadAndStore {
     
+    //log headers to read in the file
     private static final String RPM = "ENGINE RPM (rpm)";
     private static final String BFS = "Base Fuel Schedule";
     private static final String MAFV = "MAS A/F -B1 (V)";
@@ -25,7 +26,7 @@ public class CsvReadAndStore {
     private static final String ACTUALAFRBANK1 = "AFR WB-B1";
     private static final String ACTUALAFRBANK2 = "AFR WB-B2";
     
-    
+    //counter for individual MAF voltage bin arrays
     public static int counter08, counter16, counter23, counter31, counter39,
     	counter47, counter55, counter63, counter70, counter78, counter86, 
     	counter94, counter102, counter109, counter117, counter125, counter133,
@@ -33,6 +34,7 @@ public class CsvReadAndStore {
     	counter188, counter195, counter203, counter211, counter219, counter227, 
     	counter234, counter242, counter250, counterOpenLoop, afrCount, totalCount;
     
+    //multiplier to display in table
     public static double mult08, mult16, mult23, mult31, mult39,
 	mult47, mult55, mult63, mult70, mult78, mult86, 
 	mult94, mult102, mult109, mult117, mult125, mult133,
@@ -40,6 +42,7 @@ public class CsvReadAndStore {
 	mult188, mult195, mult203, mult211, mult219, mult227, mult234,
 	mult242, mult250, multOpenLoop;
     
+    //multiplier array
     public static double[] multArr = {mult08, mult16, mult23, mult31, mult39,
     	mult47, mult55, mult63, mult70, mult78, mult86, 
     	mult94, mult102, mult109, mult117, mult125, mult133,
@@ -49,6 +52,7 @@ public class CsvReadAndStore {
     
     public static float[][] finalData = new float[totalCount][2];
     
+    //This isn't really used for anything yet, but it will be
     public CsvReadAndStore() {
     	getFinalData();
     	getMultArr();
@@ -93,6 +97,8 @@ public class CsvReadAndStore {
         
         try {
         	
+        	//specifies parsing from an Excel formatted CSV file
+        	//and obtains the csv data from the specified header names
         	CSVFormat csvFileFormat = CSVFormat.EXCEL.withHeader();
             	fileReader = new FileReader(fileName);
         	csvFileParser = new CSVParser(fileReader, csvFileFormat);
@@ -100,9 +106,9 @@ public class CsvReadAndStore {
         	
             float[][] csvData = new float[csvRecords.size()][5];
           
+          //gets the csv record by row, skipping the header row
             for (int i = 1; i < csvRecords.size(); i++) {
             
-            	
             	CSVRecord record = csvRecords.get(i);
 
             	//creates an object to hold a single data set
@@ -125,6 +131,9 @@ public class CsvReadAndStore {
             	csvData[i-1][4] = v.getActualAFRB1();
             		
             	
+            		//Gets a count of how many data sets fall in a 
+            		//specific MAF voltage range, eliminating deceleration
+            		//enleanment fuel corrections (Accel Pos Volts < 1.00)
             		if (v.getMafVolts() < 0.09 && v.getMafVolts() > 0.0
             				&& v.getAccelPos() > 1.00) {  
             			counter08++;
@@ -273,7 +282,7 @@ public class CsvReadAndStore {
             //System.out.println("1.64 counter: " + counter164);
             //System.out.println("Total counter: " + totalCount);
 
-		
+	//initializing a 2D array to hold the data set of a MAF voltage bin	
             float[][] tempFinalData = new float[totalCount][2];
             int refTempFinal = 0;
             float[][] dataBin08 = new float[counter08][2];
@@ -343,6 +352,7 @@ public class CsvReadAndStore {
             float[][] dataBinOL = new float[counterOpenLoop][2];
             int refOL = 0;
             
+            //assign the dataset to a bin
             for(int i = 0; i < csvRecords.size(); i++) {
             	if (csvData[i][0] < .09 && csvData[i][0] > 0.0
             			&& csvData[i][2] > 1.00) {  
@@ -610,6 +620,7 @@ public class CsvReadAndStore {
         		} 
             }
             
+            //calculate the MAF table multiplier
             mult08 = findAvg(dataBin08);
             mult16 = findAvg(dataBin16);
             mult23 = findAvg(dataBin23);
@@ -643,6 +654,7 @@ public class CsvReadAndStore {
             mult250 = findAvg(dataBin250);
             multOpenLoop = findAFRDiff(dataBinOL);
             
+            //place the multiplier into the multiplier array
             multArr[0] = mult08;
             multArr[1] = mult16;
             multArr[2] = mult23;
@@ -690,6 +702,7 @@ public class CsvReadAndStore {
             	
         }
         
+        //catch exceptions, close reader and parser
         catch (Exception e) {
             e.printStackTrace();
         } finally {
