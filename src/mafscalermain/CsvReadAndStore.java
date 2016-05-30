@@ -6,6 +6,13 @@ import java.util.*;
 
 import org.apache.commons.csv.*;
 
+/**
+ * This class reads the CSV file, parses the CSV file using
+ * Apache Commons CSV, generates data bins using the parsed data, and
+ * manipulates the data for final output
+ * @author esanders
+ *
+ */
 public class CsvReadAndStore {
     
     private static final String RPM = "ENGINE RPM (rpm)";
@@ -41,49 +48,21 @@ public class CsvReadAndStore {
     	mult242, mult250, multOpenLoop};
     
     public static float[][] finalData = new float[totalCount][2];
-    //public static float[][] interData = new float[tc][2];   
-    //public static float[][] finalBin08 = new float[counter08][2];
-    //public static float[][] finalBin16 = new float[counter16][2];
-    //public static float[][] finalBin23 = new float[counter23][2];
-    //public static float[][] finalBin31 = new float[counter31][2];
-    //public static float[][] finalBin39 = new float[counter39][2];
-    //public static float[][] finalBin47 = new float[counter47][2];
-    //public static float[][] finalBin55 = new float[counter55][2];
-    //public static float[][] finalBin63 = new float[counter63][2];
-    //public static float[][] finalBin70 = new float[counter70][2];
-    //public static float[][] finalBin78 = new float[counter78][2];
-    //public static float[][] finalBin86 = new float[counter86][2];
-    //public static float[][] finalBin94 = new float[counter94][2];
-    //public static float[][] finalBin102 = new float[counter102][2];
-    //public static float[][] finalBin109 = new float[counter109][2];
-    //public static float[][] finalBin117 = new float[counter117][2];
-    //public static float[][] finalBin125 = new float[counter125][2];
-    //public static float[][] finalBin133 = new float[counter133][2];
-    //public static float[][] finalBin141 = new float[counter141][2];
-    //public static float[][] finalBin148 = new float[counter148][2];
-    //public static float[][] finalBin156 = new float[counter156][2];
-    //public static float[][] finalBin164 = new float[counter164][2];
-    //public static float[][] finalBin172 = new float[counter172][2];
-    //public static float[][] finalBin180 = new float[counter180][2];
-    //public static float[][] finalBin188 = new float[counter188][2];
-    //public static float[][] finalBin195 = new float[counter195][2];
-    //public static float[][] finalBin203 = new float[counter203][2];
-    //public static float[][] finalBin211 = new float[counter211][2];
-    //public static float[][] finalBin219 = new float[counter219][2];
-    //public static float[][] finalBin227 = new float[counter227][2];
-    //public static float[][] finalBin234 = new float[counter234][2];
-    //public static float[][] finalBinOL = new float[counterOpenLoop][2];
     
     public CsvReadAndStore() {
     	getFinalData();
     	getMultArr();
     }
+    
     public static float[][] getFinalData() {
     	return finalData;
     }
+    
     public static double[] getMultArr() {
     	return multArr;
     }
+    
+    //calculates the average fuel correction value for a given MAF voltage bin
     public static float findAvg(float[][] mafBinVolts) {
     	float sum = 0;
     	for(int i = 0; i < mafBinVolts.length; i++) {
@@ -92,6 +71,8 @@ public class CsvReadAndStore {
     	double mafBinAvg = ((double)sum / mafBinVolts.length) / 100;
     	return (float)mafBinAvg;
     }
+    
+    //finds the percentage difference between the target AFR and the actual AFR
     public static float findAFRDiff(float[][] afrBin) {
     	float sum = 0;
     	float[] percentDiff = new float[afrBin.length];
@@ -103,7 +84,9 @@ public class CsvReadAndStore {
     	double percentAvg = ((double)sum / percentDiff.length) / 100;
     	return (float)percentAvg;
     }
-	public static void parseCsvFile(String fileName) {
+    
+    //parses an uploaded CSV file and manipulates the data
+    public static void parseCsvFile(String fileName) {
      
     	CSVParser csvFileParser = null;
         FileReader fileReader = null;
@@ -111,10 +94,10 @@ public class CsvReadAndStore {
         try {
         	
         	CSVFormat csvFileFormat = CSVFormat.EXCEL.withHeader();
-        	//List<VariableRetriever> vr = new ArrayList<VariableRetriever>();
-            fileReader = new FileReader(fileName);
-            csvFileParser = new CSVParser(fileReader, csvFileFormat);
-            List<CSVRecord> csvRecords = csvFileParser.getRecords();
+            	fileReader = new FileReader(fileName);
+        	csvFileParser = new CSVParser(fileReader, csvFileFormat);
+        	List<CSVRecord> csvRecords = csvFileParser.getRecords();
+        	
             float[][] csvData = new float[csvRecords.size()][5];
           
             for (int i = 1; i < csvRecords.size(); i++) {
@@ -142,13 +125,13 @@ public class CsvReadAndStore {
             	csvData[i-1][4] = v.getActualAFRB1();
             		
             	
-            	if (v.getMafVolts() < 0.09 && v.getMafVolts() > 0.0
-            			&& v.getAccelPos() > 1.00) {  
-            		counter08++;
+            		if (v.getMafVolts() < 0.09 && v.getMafVolts() > 0.0
+            				&& v.getAccelPos() > 1.00) {  
+            			counter08++;
             		
         		} else if (v.getMafVolts() < .17 && v.getMafVolts() > .08
         				&& v.getAccelPos() > 1.00) {
-            		counter16++;
+            			counter16++;
             		
         		} else if (v.getMafVolts() < .24 && v.getMafVolts() > .16
         				&& v.getAccelPos() > 1.00) { 
@@ -216,7 +199,7 @@ public class CsvReadAndStore {
         			
         		} else if (v.getMafVolts() < 1.49 && v.getMafVolts() > 1.40
         				&& v.getAccelPos() > 1.00) {  
-            		counter148++;
+            			counter148++;
             		
         		} else if (v.getMafVolts() < 1.57 && v.getMafVolts() > 1.48
         				&& v.getAccelPos() > 1.00) {
@@ -275,8 +258,9 @@ public class CsvReadAndStore {
         			
         		}
                 
-			}
+		}
             
+            //sum of the maf bin counters
             totalCount = counter08 + counter16 + counter23 + counter31 + counter39 +
                 	counter47 + counter55 + counter63 + counter70 + counter78 + counter86 + 
                 	counter94 + counter102 + counter109 + counter117 + counter125 + counter133 +
@@ -287,8 +271,9 @@ public class CsvReadAndStore {
             //System.out.println("1.48 counter: " + counter148);
             //System.out.println("1.56 counter: " + counter156);
             //System.out.println("1.64 counter: " + counter164);
-            System.out.println("Total counter: " + totalCount);
+            //System.out.println("Total counter: " + totalCount);
 
+		
             float[][] tempFinalData = new float[totalCount][2];
             int refTempFinal = 0;
             float[][] dataBin08 = new float[counter08][2];
@@ -703,7 +688,8 @@ public class CsvReadAndStore {
             //System.out.println("1.64 multiplier: " + mult164);
             //System.out.println("1.72 multiplier: " + mult172);
             	
-        }       
+        }
+        
         catch (Exception e) {
             e.printStackTrace();
         } finally {
