@@ -1,5 +1,5 @@
 # vq-maf-scaling-tool
-Simple tool for simplification of MAF (Mass Air Flow) sensor voltage scaling for Nissan and Infinitis on the VQ platform. 
+Simple tool for simplification of MAF (Mass Air Flow) sensor voltage scaling for Nissan and Infinitis on the VQ platform. Log support for Uprev Cipher and Uprev ROM Editor.
 
 External Libraries (all libraries can be found in the .zip file):
 
