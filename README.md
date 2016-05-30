@@ -3,13 +3,13 @@ Simple tool for simplification of MAF (Mass Air Flow) sensor voltage scaling for
 
 External Libraries (all libraries can be found in the .zip file):
 
-Apache Commons CSV 1.2 
+-Apache Commons CSV 1.2 
 
-Apache Commons Lang 3.4 
+-Apache Commons Lang 3.4 
 
-jcommon 1.0.23
+-jcommon 1.0.23
 
-jfreechart 1.0.19
+-jfreechart 1.0.19
 
 Entry point is src/mafscalermain/Main.java. This isn't what I would call the cleanest code, there's a few features I started on but haven't completed since this project is currently on hold. Feel free to edit or suggest changes.
 
