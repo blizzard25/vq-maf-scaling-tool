@@ -17,4 +17,4 @@ Known bug 1: Double headers aren't supported yet, so if an upload doesn't displa
 
 Known bug 2: Display chart/table panel centers vertically fine, however it is offset slightly horizontally.
 
-Future versions: Implement a regression function rather than just using a percent average. Allow an input injector scaler to serve as a dependent variable in the calculations.
+Future versions: Implement a regression function rather than just using a percent average. Allow an input injector scaler to serve as a dependent variable in the calculations. Add support for uploading ignition timing and knock strength logs, output suggested target AFR and ignition timing values from the input data using MTBT (Minimum timing, best torque)
