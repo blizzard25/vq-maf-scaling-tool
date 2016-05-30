@@ -4,6 +4,11 @@ import java.awt.*;
 
 import javax.swing.*;
 
+/**
+ * Main entry point for the application
+ * @author esanders
+ *
+ */
 public class Main {
 
 	static String uploaderTitle = new String("Upload CSV File");
@@ -31,6 +36,7 @@ public class Main {
     }
     
     //I realize this is a redudant method, but it will be edited in the future to reflect another function
+    // /*
     public static void setGraphAndTable(Container frame) {
     	
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -38,4 +44,6 @@ public class Main {
         int screenHalfHeight = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
         frame.setLocation(screenHalfWidth, screenHalfHeight);
     }
+    // */
+    
 }
